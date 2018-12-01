@@ -45,10 +45,8 @@ class Blog extends React.Component {
           <Row>
             {posts.map((p) => (
             <Col xs="12" sm="6" key={p.idPost}>   
-                <Card style={cardStyle}>
-                  <a data-flickr-embed="true" href="https://www.flickr.com/photos/86918208@N06/45218152975/in/photostream/" title="arroyo_yhaka">
-                  <CardImg src="https://farm5.staticflickr.com/4856/45218152975_70f9109c26_z.jpg" width="100%" alt="arroyo_yhaka" />
-                  </a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>                
+                <Card style={cardStyle}>                  
+                  <CardImg src={p.imagenEncabezado} width="100%" alt="arroyo_yhaka" />                  
                   <CardBody>
                     <CardTitle>{p.titulo}</CardTitle>
                     <CardText>{p.contenido}</CardText>
