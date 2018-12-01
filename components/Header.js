@@ -48,43 +48,26 @@ export class Header extends React.Component {
 
         return (
             <div>
-                <Navbar color="dark" dark expand="md">
+                <Navbar color="success" dark expand="md">
                     <Link href='/'>
-                        <NavbarBrand style={NavbarBrandStyle}>Aplicacion</NavbarBrand>
+                        <NavbarBrand style={NavbarBrandStyle}>Caacupé Turístico</NavbarBrand>
                     </Link>
                     <NavbarToggler onClick={this.toggle}></NavbarToggler>
-                    <Collapse isOpen={ isOpen } navbar>
-                        <Nav className="mr-auto" navbar style={NavStyle}>
-
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                Archivo
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                <Link href='/blog'>
-                                    <DropdownItem>
-                                        Blog
-                                    </DropdownItem>
-                                </Link>
-                                
-                                <Link href='/pais'>
-                                    <DropdownItem>
-                                        Pais
-                                    </DropdownItem>
-                                </Link>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>                            
-
-                        </Nav>
+                    <Collapse isOpen={ isOpen } navbar>                        
                         <Nav className="ml-auto" navbar style={NavStyle}>                            
                             <NavItem>
-                                <Link href='/acercade'>
-                                    <NavLink>Acerca de</NavLink>
+                                <Link href='/'>
+                                    <NavLink>Inicio</NavLink>
                                 </Link>     
                             </NavItem>
                             <NavItem>
-                                <Link href='/ayuda'>
-                                    <NavLink>Ayuda</NavLink>
+                                <Link href='/blog'>
+                                    <NavLink>Contenido</NavLink>
+                                </Link>     
+                            </NavItem>
+                            <NavItem>
+                                <Link href='/contactos'>
+                                    <NavLink>Contactos</NavLink>
                                 </Link>     
                             </NavItem>
                         </Nav>

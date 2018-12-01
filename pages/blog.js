@@ -1,33 +1,75 @@
 import React from "react";
 import Link from 'next/link';
 import Layout from "../components/MyLayout";
-import PrincipalBlog from "../components/PrincipalBlog";
-import { Container, ListGroup, ListGroupItem } from "reactstrap";
+import { 
+  Container, 
+  Card, 
+  CardImg,
+  CardText, 
+  CardBody, 
+  CardTitle,   
+  Row,
+  Col,
+  Button } from "reactstrap";
 import fetch from "isomorphic-unfetch";
 
 const listGroupItemStyle = {
   border: "none"
 };
 
+const cardStyle = {
+  marginTop: "25px"
+}
+
 class Blog extends React.Component {
+  
+  constructor() {    
+    super();        
+  }
+
+  async fetchPost() {
+    
+    
+  }
+
+  componentWillMount() {
+    this.fetchPost();    
+  }  
+
   render() {
-    const { blogs } = this.props;
+    const { posts } = this.props;
 
     return (
-      <Layout>
-        <PrincipalBlog />
+      <Layout>        
         <Container className="blog-cont">        
-          <ListGroup>
-            {blogs.map(blog => (
-              <ListGroupItem style={listGroupItemStyle} key={blog.id}>                
-                <Link as={`/blog-detail/${blog.id}`} href={`/blog-detail?id=${blog.id}`}>
-                    <h2 className="blog-title">{blog.title}</h2>
-                </Link>            
-                <h4 className="small">Publicado el 13 noviembre, 2018 </h4>
-                <p className="blog-body">{blog.body}</p>                
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+          <Row>
+            {posts.map((p) => (
+            <Col xs="12" sm="6" key={p.idPost}>   
+                <Card style={cardStyle}>
+                  <a data-flickr-embed="true" href="https://www.flickr.com/photos/86918208@N06/45218152975/in/photostream/" title="arroyo_yhaka">
+                  <CardImg src="https://farm5.staticflickr.com/4856/45218152975_70f9109c26_z.jpg" width="100%" alt="arroyo_yhaka" />
+                  </a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>                
+                  <CardBody>
+                    <CardTitle>{p.titulo}</CardTitle>
+                    <CardText>{p.contenido}</CardText>
+                    <Button color="primary" outline >Ver más</Button>
+                  </CardBody>
+                </Card>
+            </Col>
+              ))}           
+            {/* <Col xs="12" sm="6">               */}
+            {/* <Col xs="12" sm="6">
+              <Card style={cardStyle}>
+                <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"></CardImg>
+                <CardBody>
+                  <CardTitle>Cerro Kavaju</CardTitle>
+                  <CardText>Cerro situado en medio de tres ciudades Caacupé, Atyra y Tobati</CardText>
+                  <Button color="primary" outline >Ver más</Button>
+                </CardBody>
+              </Card>
+            </Col> */}
+          </Row>
+          
         </Container>
         <style jsx global>
           {`
@@ -52,6 +94,7 @@ class Blog extends React.Component {
 
             .blog-cont {                                
                 width: 800px;
+                margin-top: 30px;
             }
 
             @media only screen and (max-width: 630px) {
@@ -72,12 +115,10 @@ class Blog extends React.Component {
   }
 }
 
-Blog.getInitialProps = async () => {
-  const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await respuesta.json();
-  return {
-    blogs: data
-  };
+Blog.getInitialProps = async () => {  
+  const data = await import('../data/posts.json')
+  console.log({ posts: data.default });  
+  return { posts: data.default };
 };
 
 export default Blog;
