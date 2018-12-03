@@ -12,9 +12,9 @@ class BlogDetail extends React.Component {
         return (
             <Layout>
                 <Container className="blog-cont">                    
-                    <h1 class="blog-title">{ blog.title }</h1>  
-                    <h4 className="small">Publicado el 13 noviembre, 2018 </h4>
-                    <p className="blog-body">{blog.body}</p>                     
+                    <h1 class="blog-title">Basilica de Caacupe</h1>  
+                    {/* <h4 className="small">Publicado el 13 noviembre, 2018 </h4>
+                    <p className="blog-body">{blog.body}</p>                      */}
                 </Container>    
                 <style jsx global>
                 {`
@@ -22,6 +22,7 @@ class BlogDetail extends React.Component {
                         font-family: "Oxygen", sans-serif;
                         font-weight: 700;
                         font-size: 2rem;                    
+                        text-align: center;
                     }
 
                     .blog-body {
@@ -59,15 +60,15 @@ class BlogDetail extends React.Component {
     }
 }
 
-BlogDetail.getInitialProps = async (context) => {
-    const { id } = context.query;
-    const respuesta = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    const data = await respuesta.json();
-    console.log(data);
-    return {
-      blog: data
-    };
-};
+// BlogDetail.getInitialProps = async (context) => {
+//     const { id } = context.query;
+//     const respuesta = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+//     const data = await respuesta.json();
+//     console.log(data);
+//     return {
+//       blog: data
+//     };
+// };
 
 
 export default BlogDetail;

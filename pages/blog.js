@@ -50,22 +50,13 @@ class Blog extends React.Component {
                   <CardBody>
                     <CardTitle>{p.titulo}</CardTitle>
                     <CardText>{p.contenido}</CardText>
-                    <Button color="primary" outline >Ver más</Button>
+                    <Link href="/blog-detail">
+                      <Button color="primary" outline >Ver más</Button>
+                    </Link>
                   </CardBody>
                 </Card>
             </Col>
-              ))}           
-            {/* <Col xs="12" sm="6">               */}
-            {/* <Col xs="12" sm="6">
-              <Card style={cardStyle}>
-                <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"></CardImg>
-                <CardBody>
-                  <CardTitle>Cerro Kavaju</CardTitle>
-                  <CardText>Cerro situado en medio de tres ciudades Caacupé, Atyra y Tobati</CardText>
-                  <Button color="primary" outline >Ver más</Button>
-                </CardBody>
-              </Card>
-            </Col> */}
+              ))}                       
           </Row>
           
         </Container>
