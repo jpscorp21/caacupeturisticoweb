@@ -17,12 +17,20 @@ import {
 
 
 const NavbarBrandStyle = {    
-    color: 'white',
+    color: 'green',
     cursor: 'pointer'
 }
 
 const NavStyle = {
     cursor: 'pointer'
+}
+
+const NavbarStyle = {
+    borderBottom: "2px green solid"
+}
+
+const NavbarTogglerStyle = {
+    color: "white !important",        
 }
 
 
@@ -48,11 +56,12 @@ export class Header extends React.Component {
 
         return (
             <div>
-                <Navbar color="success" dark expand="md">
+                <Navbar color="white" expand="md" light style={NavbarStyle}>
+                    <img className="img-fluid" src="https://farm5.staticflickr.com/4855/46160425631_86a9a2c44a_m.jpg" width="64" height="64" alt="aprestucor" />
                     <Link href='/'>
                         <NavbarBrand style={NavbarBrandStyle}>Caacupé Turístico</NavbarBrand>
                     </Link>
-                    <NavbarToggler onClick={this.toggle}></NavbarToggler>
+                    <NavbarToggler className="toggler" onClick={this.toggle}></NavbarToggler>
                     <Collapse isOpen={ isOpen } navbar>                        
                         <Nav className="ml-auto" navbar style={NavStyle}>                            
                             <NavItem>
@@ -73,6 +82,13 @@ export class Header extends React.Component {
                         </Nav>
                     </Collapse>
                 </Navbar>                               
+                <style jsx>
+                {`                
+                        .navbar {
+                            color: green !important,                            
+                        }
+                `}
+                </style>
             </div>
         )
     }

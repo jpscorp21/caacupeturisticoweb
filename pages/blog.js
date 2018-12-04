@@ -13,14 +13,6 @@ import {
   Button } from "reactstrap";
 import fetch from "isomorphic-unfetch";
 
-const listGroupItemStyle = {
-  border: "none"
-};
-
-const cardStyle = {
-  marginTop: "25px"
-}
-
 class Blog extends React.Component {
   
   constructor() {    
@@ -45,13 +37,13 @@ class Blog extends React.Component {
           <Row>
             {posts.map((p) => (
             <Col xs="12" sm="6" key={p.idPost}>   
-                <Card style={cardStyle}>                  
+                <Card style={cardStyle} className="card">                  
                   <CardImg src={p.imagenEncabezado} width="100%" alt="arroyo_yhaka" />                  
                   <CardBody>
                     <CardTitle>{p.titulo}</CardTitle>
                     <CardText>{p.contenido}</CardText>
-                    <Link href="/blog-detail">
-                      <Button color="primary" outline >Ver más</Button>
+                    <Link href={`/blog-detail?id=${p.idPost}`} as={`/blog-detail/${p.idPost}`}>
+                      <Button color="success" outline >Ver más</Button>
                     </Link>
                   </CardBody>
                 </Card>
@@ -62,6 +54,9 @@ class Blog extends React.Component {
         </Container>
         <style jsx global>
           {`
+            .blog-cont {
+
+            }
             .blog-title {
               font-family: "Oxygen", sans-serif;
               font-weight: 700;
@@ -79,6 +74,12 @@ class Blog extends React.Component {
             h4.small {
                 font-size: 14px;
                 color: #9EABB3;
+            }
+
+            .card {
+              -webkit-box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
+              -moz-box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
+              box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
             }
 
             .blog-cont {                                
@@ -105,9 +106,16 @@ class Blog extends React.Component {
 }
 
 Blog.getInitialProps = async () => {  
-  const data = await import('../data/posts.json')
-  console.log({ posts: data.default });  
+  const data = await import('../data/posts.json');  
   return { posts: data.default };
 };
+
+const listGroupItemStyle = {
+  border: "none"
+};
+
+const cardStyle = {
+  marginTop: "25px"
+}
 
 export default Blog;

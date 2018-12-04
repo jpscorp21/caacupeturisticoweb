@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../components/MyLayout';
 import { Container } from 'reactstrap';
 import fetch from "isomorphic-unfetch";
+import ReactHtmlParser from 'react-html-parser';
 
 class BlogDetail extends React.Component {
 
@@ -10,26 +11,34 @@ class BlogDetail extends React.Component {
         const { blog } = this.props;
 
         return (
-            <Layout>
-                <Container className="blog-cont">                    
-                    <h1 class="blog-title">Basilica de Caacupe</h1>  
-                    {/* <h4 className="small">Publicado el 13 noviembre, 2018 </h4>
-                    <p className="blog-body">{blog.body}</p>                      */}
-                </Container>    
+            <Layout>                
+                    <Container className="blog-cont">     
+                        <h1 className="blog-title mb-5">{blog.titulo}</h1>  
+                        <p className="blog-body">{blog.contenido}</p>
+                        {ReactHtmlParser(blog.contenidoDetalle)}
+                    </Container>      
+
                 <style jsx global>
                 {`
                     .blog-title {
                         font-family: "Oxygen", sans-serif;
-                        font-weight: 700;
-                        font-size: 2rem;                    
-                        text-align: center;
-                    }
+                        font-weight: 900;
+                        font-size: 2.8rem;                    
+                        text-align: center;                        
+                    }                    
 
-                    .blog-body {
+                    .blog-body, p {
                         font-family: "Lato", sans-serif;
                         color: #555;
-                        font-size: 17px;                
+                        font-size: 19px;                
                         text-rendering: geometricPrecision;                
+                    }      
+                    
+                    .blog-cont li {
+                        font-family: "Lato", sans-serif;
+                        font-size: 19px;                
+                        padding-bottom: 10px;
+                        list-style-type: disc;
                     }
 
                     h4.small {
@@ -44,7 +53,11 @@ class BlogDetail extends React.Component {
 
                     @media only screen and (max-width: 630px) {
                         .blog-title {
-                            font-size: 1.6rem;
+                            font-size: 2.2rem;
+                        }
+
+                        .blog-body, p, li {
+                            font-size: 17px;
                         }
 
                         .blog-cont {
@@ -60,15 +73,12 @@ class BlogDetail extends React.Component {
     }
 }
 
-// BlogDetail.getInitialProps = async (context) => {
-//     const { id } = context.query;
-//     const respuesta = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-//     const data = await respuesta.json();
-//     console.log(data);
-//     return {
-//       blog: data
-//     };
-// };
+BlogDetail.getInitialProps = async (context) => {
+    const { id } = context.query;
+    const data = await import(`../data/posts.json`)
+    const blog = data.default.filter((item) => item.idPost === id);    
+    return { blog: blog[0] };
+};
 
 
 export default BlogDetail;
