@@ -13,13 +13,16 @@ class BlogDetail extends React.Component {
         return (
             <Layout>                
                     <Container className="blog-cont">     
-                        <h1 className="blog-title mb-5">{blog.titulo}</h1>  
-                        <p className="blog-body">{blog.contenido}</p>
+                        <h1 className="blog-title mb-5">{blog.titulo}</h1>                          
                         {ReactHtmlParser(blog.contenidoDetalle)}
                     </Container>      
 
                 <style jsx global>
                 {`
+                    .blog-cont {
+                        margin-bottom: 30px;
+                    }
+
                     .blog-title {
                         font-family: "Oxygen", sans-serif;
                         font-weight: 900;

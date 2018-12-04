@@ -55,7 +55,7 @@ class Blog extends React.Component {
         <style jsx global>
           {`
             .blog-cont {
-
+              margin-bottom: 50px;
             }
             .blog-title {
               font-family: "Oxygen", sans-serif;

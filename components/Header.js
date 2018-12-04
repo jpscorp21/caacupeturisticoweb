@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import {
     Collapse,
@@ -7,32 +7,8 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    Jumbotron   
+    NavLink    
 } from 'reactstrap';
-
-
-const NavbarBrandStyle = {    
-    color: 'green',
-    cursor: 'pointer'
-}
-
-const NavStyle = {
-    cursor: 'pointer'
-}
-
-const NavbarStyle = {
-    borderBottom: "2px green solid"
-}
-
-const NavbarTogglerStyle = {
-    color: "white !important",        
-}
-
 
 export class Header extends React.Component {
 
@@ -61,22 +37,17 @@ export class Header extends React.Component {
                     <Link href='/'>
                         <NavbarBrand style={NavbarBrandStyle}>Caacupé Turístico</NavbarBrand>
                     </Link>
-                    <NavbarToggler className="toggler" onClick={this.toggle}></NavbarToggler>
+                    <NavbarToggler style={NavbarTogglerStyle} className="toggler" onClick={this.toggle}></NavbarToggler>
                     <Collapse isOpen={ isOpen } navbar>                        
                         <Nav className="ml-auto" navbar style={NavStyle}>                            
                             <NavItem>
                                 <Link href='/'>
-                                    <NavLink>Inicio</NavLink>
+                                    <NavLink style={NavLinkStyle}>Inicio</NavLink>
                                 </Link>     
-                            </NavItem>
-                            <NavItem>
-                                <Link href='/blog'>
-                                    <NavLink>Contenido</NavLink>
-                                </Link>     
-                            </NavItem>
+                            </NavItem>                            
                             <NavItem>
                                 <Link href='/contactos'>
-                                    <NavLink>Contactos</NavLink>
+                                    <NavLink style={NavLinkStyle}>Contactos</NavLink>
                                 </Link>     
                             </NavItem>
                         </Nav>
@@ -85,13 +56,38 @@ export class Header extends React.Component {
                 <style jsx>
                 {`                
                         .navbar {
-                            color: green !important,                            
+                            color: green !important;                            
                         }
-                `}
+                        
+                 `}
                 </style>
             </div>
         )
     }
 }
+
+const NavbarBrandStyle = {    
+    color: 'green',
+    fontWeight: '500',
+    cursor: 'pointer'
+}
+
+const NavStyle = {
+    cursor: 'pointer',
+    color: 'green'
+}
+
+const NavLinkStyle = {
+    color: 'green'
+}
+
+const NavbarStyle = {
+    borderBottom: "2px green solid"
+}
+
+const NavbarTogglerStyle = {
+    color: "green",        
+}
+
 
 export default Header;
