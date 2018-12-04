@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <style>{`body { margin: 0 } /* custom! */`}</style>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Lato|Oxygen">
           </link>
         </Head>

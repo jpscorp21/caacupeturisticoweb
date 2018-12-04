@@ -1,36 +1,62 @@
 import React from "react";
 import Link from 'next/link';
 import Layout from "../components/MyLayout";
-import PrincipalBlog from "../components/PrincipalBlog";
-import { Container, ListGroup, ListGroupItem } from "reactstrap";
+import { 
+  Container, 
+  Card, 
+  CardImg,
+  CardText, 
+  CardBody, 
+  CardTitle,   
+  Row,
+  Col,
+  Button } from "reactstrap";
 import fetch from "isomorphic-unfetch";
 
-const listGroupItemStyle = {
-  border: "none"
-};
-
 class Blog extends React.Component {
+  
+  constructor() {    
+    super();        
+  }
+
+  async fetchPost() {
+    
+    
+  }
+
+  componentWillMount() {
+    this.fetchPost();    
+  }  
+
   render() {
-    const { blogs } = this.props;
+    const { posts } = this.props;
 
     return (
-      <Layout>
-        <PrincipalBlog />
+      <Layout>        
         <Container className="blog-cont">        
-          <ListGroup>
-            {blogs.map(blog => (
-              <ListGroupItem style={listGroupItemStyle} key={blog.id}>                
-                <Link as={`/blog-detail/${blog.id}`} href={`/blog-detail?id=${blog.id}`}>
-                    <h2 className="blog-title">{blog.title}</h2>
-                </Link>            
-                <h4 className="small">Publicado el 13 noviembre, 2018 </h4>
-                <p className="blog-body">{blog.body}</p>                
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+          <Row>
+            {posts.map((p) => (
+            <Col xs="12" sm="6" key={p.idPost}>   
+                <Card style={cardStyle} className="card">                  
+                  <CardImg src={p.imagenEncabezado} width="100%" alt="arroyo_yhaka" />                  
+                  <CardBody>
+                    <CardTitle>{p.titulo}</CardTitle>
+                    <CardText>{p.contenido}</CardText>
+                    <Link href={`/blog-detail?id=${p.idPost}`} as={`/blog-detail/${p.idPost}`}>
+                      <Button color="success" outline >Ver más</Button>
+                    </Link>
+                  </CardBody>
+                </Card>
+            </Col>
+              ))}                       
+          </Row>
+          
         </Container>
         <style jsx global>
           {`
+            .blog-cont {
+
+            }
             .blog-title {
               font-family: "Oxygen", sans-serif;
               font-weight: 700;
@@ -50,8 +76,15 @@ class Blog extends React.Component {
                 color: #9EABB3;
             }
 
+            .card {
+              -webkit-box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
+              -moz-box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
+              box-shadow: 9px 10px 24px -6px rgba(143,143,143,1);
+            }
+
             .blog-cont {                                
                 width: 800px;
+                margin-top: 30px;
             }
 
             @media only screen and (max-width: 630px) {
@@ -72,12 +105,17 @@ class Blog extends React.Component {
   }
 }
 
-Blog.getInitialProps = async () => {
-  const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await respuesta.json();
-  return {
-    blogs: data
-  };
+Blog.getInitialProps = async () => {  
+  const data = await import('../data/posts.json');  
+  return { posts: data.default };
 };
+
+const listGroupItemStyle = {
+  border: "none"
+};
+
+const cardStyle = {
+  marginTop: "25px"
+}
 
 export default Blog;
