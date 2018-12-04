@@ -1,0 +1,7 @@
+-25.385496, -57.140869  - Basilica de Caacupé
+-25.343008, -57.080209  - Estancia aventura
+-25.399057, -57.188135  - Posada el escondido
+-25.382194, -57.139976  - Tupasy ykua
+-25.388576, -57.136701  - Parque Recreativo Lagorâ
+-25.405097,  -57.256375  - Posada Luis Alberto
+ 
